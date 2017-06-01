@@ -61,3 +61,6 @@ typings/
 *.pem
 *.key
 *.cert
+
+#Local configuration environement
+config.env
