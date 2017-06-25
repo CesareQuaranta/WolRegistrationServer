@@ -3,6 +3,7 @@ var app = require('../server');
 var router = express.Router();
 var db= app.get('db');
 var keychain = db.get('keychain');
+var stats = db.get('stats');
 var RSA= app.get('RSA-Public');
 var ursa = require('ursa');
 
@@ -43,6 +44,7 @@ router.post('/', function(req, res) {
               console.log('CrypToken:'+crypToken);
               res.status(200);
               res.json({Token:crypToken,accessPoint:'ws://64.137.241.9:28080/wol/ws'});
+              db.stats.save({ 'email': rEmail, 'ip':ip, 'timestamp': now.getTime()});
               //res.json({Token:crypToken,accessPoint:'ws://localhost:8080/wol/ws'});
             }else{
               res.status(501);
