@@ -14,6 +14,7 @@ var ursa = require('ursa');
     next(); // make sure we go to the next routes and don't stop here
 });*/
 /*
+db.createCollection("stats")
 db.keychain.save({ email: 'cesare.quaranta@gmail.com', secret:"testSecreto" });
 */
 router.post('/', function(req, res) {
@@ -44,7 +45,7 @@ router.post('/', function(req, res) {
               console.log('CrypToken:'+crypToken);
               res.status(200);
               res.json({Token:crypToken,accessPoint:'ws://64.137.241.9:28080/wol/ws'});
-              db.stats.save({ 'email': rEmail, 'ip':ip, 'timestamp': now.getTime()});
+              stats.insert({ 'email': rEmail, 'ip':ip, 'timestamp': now.getTime()});
               //res.json({Token:crypToken,accessPoint:'ws://localhost:8080/wol/ws'});
             }else{
               res.status(501);
